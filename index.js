@@ -52,6 +52,15 @@ server.post('/api/login', (req, res) => {
 
 
 
+// CAN ONLY BE ACCESSED BY CLIENTS WITH VALID CREDENTIALS
+server.get('/api/users', restricted, (req, res) => {
+  Users.find()
+  .then(users => {
+    res.json(users)
+  })
+  .catch(err => res.send(err))
+})
+
 
 
 const port = process.env.PORT || 5000;
